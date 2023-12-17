@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace ChrisReedIO\WeatherGov\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class WeatherGovCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-weathergov-sdk';
 
     public $description = 'My command';
 
