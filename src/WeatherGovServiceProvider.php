@@ -2,9 +2,9 @@
 
 namespace ChrisReedIO\WeatherGov;
 
+use ChrisReedIO\WeatherGov\Commands\WeatherGovCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use ChrisReedIO\WeatherGov\Commands\WeatherGovCommand;
 
 class WeatherGovServiceProvider extends PackageServiceProvider
 {

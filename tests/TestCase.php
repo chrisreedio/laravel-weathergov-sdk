@@ -2,9 +2,9 @@
 
 namespace ChrisReedIO\WeatherGov\Tests;
 
+use ChrisReedIO\WeatherGov\WeatherGovServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use ChrisReedIO\WeatherGov\WeatherGovServiceProvider;
 
 class TestCase extends Orchestra
 {
