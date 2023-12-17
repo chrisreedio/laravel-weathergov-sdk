@@ -2,8 +2,6 @@
 
 namespace ChrisReedIO\WeatherGov\Data;
 
-use ChrisReedIO\WeatherGov\Data\WGData;
-
 readonly class ForecastData extends WGData
 {
     public function __construct(

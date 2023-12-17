@@ -8,7 +8,8 @@ abstract class BaseResource
 {
     protected readonly WeatherGovConnector $connector;
 
-    public function __construct(WeatherGovConnector $connector) {
+    public function __construct(WeatherGovConnector $connector)
+    {
         $this->connector = $connector;
     }
 }

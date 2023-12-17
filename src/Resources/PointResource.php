@@ -80,7 +80,6 @@ class PointResource extends BaseResource
         return $this->connector->send($officeRequest)->dtoOrFail();
     }
 
-
     public function forecast(): ForecastData
     {
         $point = $this->getPoint();

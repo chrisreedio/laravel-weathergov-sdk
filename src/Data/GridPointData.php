@@ -146,7 +146,7 @@ readonly class GridPointData extends WGData
 
     protected static function extract(array $measurements): array
     {
-        return array_filter(array_map(function ($measurement) use ($measurements) {
+        return array_filter(array_map(function ($measurement) {
             if (is_array($measurement['value'])) {
                 return $measurement['value'];
             }

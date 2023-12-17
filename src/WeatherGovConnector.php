@@ -2,11 +2,9 @@
 
 namespace ChrisReedIO\WeatherGov;
 
-use ChrisReedIO\WeatherGov\Requests\PointRequest;
 use ChrisReedIO\WeatherGov\Resources\ForecastResource;
 use ChrisReedIO\WeatherGov\Resources\PointResource;
 use Saloon\Http\Connector;
-use Saloon\Http\Response;
 use Saloon\Traits\Plugins\AcceptsJson;
 
 class WeatherGovConnector extends Connector

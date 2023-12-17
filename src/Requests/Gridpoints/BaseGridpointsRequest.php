@@ -4,7 +4,6 @@ namespace ChrisReedIO\WeatherGov\Requests\Gridpoints;
 
 use ChrisReedIO\WeatherGov\Requests\BaseRequest;
 use Saloon\Enums\Method;
-use Saloon\Http\Response;
 
 /**
  * @property $pathSuffix
