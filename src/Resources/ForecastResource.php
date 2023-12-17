@@ -3,7 +3,7 @@
 namespace ChrisReedIO\WeatherGov\Resources;
 
 use ChrisReedIO\WeatherGov\Data\PointData;
-use ChrisReedIO\WeatherGov\Requests\Forecast\ForecastRequest;
+use ChrisReedIO\WeatherGov\Requests\Gridpoints\ForecastRequest;
 use Saloon\Http\Response;
 
 class ForecastResource extends BaseResource

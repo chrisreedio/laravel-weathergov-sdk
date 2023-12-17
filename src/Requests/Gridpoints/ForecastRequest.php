@@ -1,6 +1,6 @@
 <?php
 
-namespace ChrisReedIO\WeatherGov\Requests\Forecast;
+namespace ChrisReedIO\WeatherGov\Requests\Gridpoints;
 
 class ForecastRequest extends BaseForecastRequest
 {
