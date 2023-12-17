@@ -2,17 +2,7 @@
 
 namespace ChrisReedIO\WeatherGov\Requests\Forecast;
 
-use ChrisReedIO\WeatherGov\Data\ForecastData;
-use Saloon\Http\Response;
-
-class ForecastRequest extends BaseGridpointsRequest
+class ForecastRequest extends BaseForecastRequest
 {
     protected ?string $pathSuffix = 'forecast';
-
-    public function createDtoFromResponse(Response $response): ForecastData
-    {
-        return ForecastData::fromArray(self::responseData($response));
-    }
-
-
 }

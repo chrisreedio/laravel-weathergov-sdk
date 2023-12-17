@@ -1,9 +1,8 @@
 <?php
 
-namespace ChrisReedIO\WeatherGov\Requests\Forecast;
+namespace ChrisReedIO\WeatherGov\Requests;
 
 use ChrisReedIO\WeatherGov\Data\OfficeData;
-use ChrisReedIO\WeatherGov\Requests\BaseRequest;
 use Saloon\Http\Response;
 
 class OfficeRequest extends BaseRequest

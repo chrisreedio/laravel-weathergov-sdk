@@ -3,7 +3,6 @@
 namespace ChrisReedIO\WeatherGov\Requests;
 
 use ChrisReedIO\WeatherGov\Data\PointData;
-use Saloon\Http\Request;
 use Saloon\Http\Response;
 
 class PointRequest extends BaseRequest

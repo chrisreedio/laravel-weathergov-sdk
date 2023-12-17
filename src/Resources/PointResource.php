@@ -6,10 +6,11 @@ use ChrisReedIO\WeatherGov\Data\ForecastData;
 use ChrisReedIO\WeatherGov\Data\OfficeData;
 use ChrisReedIO\WeatherGov\Data\PointData;
 use ChrisReedIO\WeatherGov\Requests\Forecast\ForecastRequest;
-use ChrisReedIO\WeatherGov\Requests\Forecast\OfficeRequest;
+use ChrisReedIO\WeatherGov\Requests\Forecast\HourlyForecastRequest;
+use ChrisReedIO\WeatherGov\Requests\OfficeRequest;
 use ChrisReedIO\WeatherGov\Requests\PointRequest;
 use ChrisReedIO\WeatherGov\WeatherGovConnector;
-use Saloon\Http\Response;
+use mysql_xdevapi\Exception;
 
 class PointResource extends BaseResource
 {
@@ -54,10 +55,16 @@ class PointResource extends BaseResource
      */
     protected function metadata(): PointData
     {
+        // TODO: Check for a cached version of the metadata
         $pointRequest = new PointRequest($this->latitude, $this->longitude);
         $this->point = $this->connector->send($pointRequest)->dtoOrFail();
 
         return $this->point;
+    }
+
+    protected function getPoint(): PointData
+    {
+        return $this->point ?? $this->metadata();
     }
     //endregion
 
@@ -66,50 +73,52 @@ class PointResource extends BaseResource
     //region Forecast Methods
     public function office(): OfficeData
     {
-        $point = (! isset($this->point)) ? $this->metadata() : $this->point;
-
-        $officeRequest = new OfficeRequest($point->gridId);
+        $officeRequest = new OfficeRequest($this->getPoint()->gridId);
 
         return $this->connector->send($officeRequest)->dtoOrFail();
     }
 
     public function forecast(): ForecastData
     {
-        $point = (! isset($this->point)) ? $this->metadata() : $this->point;
+        $point = $this->getPoint();
 
         $forecastRequest = new ForecastRequest($point->gridId, $point->gridX, $point->gridY);
 
         return $this->connector->send($forecastRequest)->dtoOrFail();
     }
 
-    public function hourly(): void
+    public function hourly(): ForecastData
     {
+        $point = $this->getPoint();
 
+        $forecastRequest = new HourlyForecastRequest($point->gridId, $point->gridX, $point->gridY);
+
+        return $this->connector->send($forecastRequest)->dtoOrFail();
     }
 
     public function grid(): void
     {
-
+        throw new Exception('Not Implemented');
     }
 
     public function stations(): void
     {
-
+        throw new Exception('Not Implemented');
     }
 
     public function zone(): void
     {
-
+        throw new Exception('Not Implemented');
     }
 
     public function county(): void
     {
-
+        throw new Exception('Not Implemented');
     }
 
     public function fire(): void
     {
-
+        throw new Exception('Not Implemented');
     }
     //endregion
 }
