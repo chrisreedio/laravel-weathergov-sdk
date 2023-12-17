@@ -3,9 +3,11 @@
 namespace ChrisReedIO\WeatherGov\Resources;
 
 use ChrisReedIO\WeatherGov\Data\ForecastData;
+use ChrisReedIO\WeatherGov\Data\GridPointData;
 use ChrisReedIO\WeatherGov\Data\OfficeData;
 use ChrisReedIO\WeatherGov\Data\PointData;
 use ChrisReedIO\WeatherGov\Requests\Gridpoints\ForecastRequest;
+use ChrisReedIO\WeatherGov\Requests\Gridpoints\GridpointsRequest;
 use ChrisReedIO\WeatherGov\Requests\Gridpoints\HourlyForecastRequest;
 use ChrisReedIO\WeatherGov\Requests\OfficeRequest;
 use ChrisReedIO\WeatherGov\Requests\PointRequest;
@@ -78,10 +80,12 @@ class PointResource extends BaseResource
         return $this->connector->send($officeRequest)->dtoOrFail();
     }
 
+
     public function forecast(): ForecastData
     {
         $point = $this->getPoint();
 
+        // Example: https://api.weather.gov/gridpoints/LWX/97,71/stations
         $forecastRequest = new ForecastRequest($point->gridId, $point->gridX, $point->gridY);
 
         return $this->connector->send($forecastRequest)->dtoOrFail();
@@ -96,11 +100,19 @@ class PointResource extends BaseResource
         return $this->connector->send($forecastRequest)->dtoOrFail();
     }
 
-    public function grid(): void
+    public function gridpoints(): GridPointData
     {
-        throw new Exception('Not Implemented');
+        $point = $this->getPoint();
+
+        $gridRequest = new GridpointsRequest($point->gridId, $point->gridX, $point->gridY);
+
+        return $this->connector->send($gridRequest)->dtoOrFail();
     }
 
+    /**
+     * TODO: This will require cursor based pagination
+     * Example: https://api.weather.gov/gridpoints/LWX/97,71/stations
+     */
     public function stations(): void
     {
         throw new Exception('Not Implemented');

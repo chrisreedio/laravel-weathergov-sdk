@@ -2,9 +2,156 @@
 
 namespace ChrisReedIO\WeatherGov\Data;
 
-use ChrisReedIO\WeatherGov\Data\WGData;
-
 readonly class GridPointData extends WGData
 {
+    public function __construct(
+        public string $gridId,
+        public int $gridX,
+        public int $gridY,
+        public string $updateTime,
+        public string $validTimes,
+        public array $elevation,
+        public string $forecastOffice,
+        public array $temperature,
+        public array $dewpoint,
+        public array $maxTemperature,
+        public array $minTemperature,
+        public array $relativeHumidity,
+        public array $apparentTemperature,
+        public array $wetBulbGlobeTemperature,
+        public array $heatIndex,
+        public array $windChill,
+        public array $skyCover,
+        public array $windDirection,
+        public array $windSpeed,
+        public array $windGust,
+        public array $weather,
+        public array $hazards,
+        public array $probabilityOfPrecipitation,
+        public array $quantitativePrecipitation,
+        public array $iceAccumulation,
+        public array $snowfallAmount,
+        public array $snowLevel,
+        public array $ceilingHeight,
+        public array $visibility,
+        public array $transportWindSpeed,
+        public array $transportWindDirection,
+        public array $mixingHeight,
+        public array $hainesIndex,
+        public array $lightningActivityLevel,
+        public array $twentyFootWindSpeed,
+        public array $twentyFootWindDirection,
+        public array $waveHeight,
+        public array $wavePeriod,
+        public array $waveDirection,
+        public array $primarySwellHeight,
+        public array $primarySwellDirection,
+        public array $secondarySwellHeight,
+        public array $secondarySwellDirection,
+        public array $wavePeriod2,
+        public array $windWaveHeight,
+        public array $dispersionIndex,
+        public array $pressure,
+        public array $probabilityOfTropicalStormWinds,
+        public array $probabilityOfHurricaneWinds,
+        public array $potentialOf15mphWinds,
+        public array $potentialOf25mphWinds,
+        public array $potentialOf35mphWinds,
+        public array $potentialOf45mphWinds,
+        public array $potentialOf20mphWindGusts,
+        public array $potentialOf30mphWindGusts,
+        public array $potentialOf40mphWindGusts,
+        public array $potentialOf50mphWindGusts,
+        public array $potentialOf60mphWindGusts,
+        public array $grasslandFireDangerIndex,
+        public array $probabilityOfThunder,
+        public array $davisStabilityIndex,
+        public array $atmosphericDispersionIndex,
+        public array $lowVisibilityOccurrenceRiskIndex,
+        public array $stability,
+        public array $redFlagThreatIndex
+    ) {
+    }
 
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            gridId: $data['gridId'],
+            gridX: (int) $data['gridX'],
+            gridY: (int) $data['gridY'],
+            updateTime: $data['updateTime'],
+            validTimes: $data['validTimes'],
+            elevation: $data['elevation'],
+            forecastOffice: $data['forecastOffice'],
+            temperature: self::extract($data['temperature']),
+            dewpoint: self::extract($data['dewpoint']),
+            maxTemperature: self::extract($data['maxTemperature']),
+            minTemperature: self::extract($data['minTemperature']),
+            relativeHumidity: self::extract($data['relativeHumidity']),
+            apparentTemperature: self::extract($data['apparentTemperature']),
+            wetBulbGlobeTemperature: self::extract($data['wetBulbGlobeTemperature']),
+            heatIndex: self::extract($data['heatIndex']),
+            windChill: self::extract($data['windChill']),
+            skyCover: self::extract($data['skyCover']),
+            windDirection: self::extract($data['windDirection']),
+            windSpeed: self::extract($data['windSpeed']),
+            windGust: self::extract($data['windGust']),
+            weather: self::extract($data['weather']),
+            hazards: self::extract($data['hazards']),
+            probabilityOfPrecipitation: self::extract($data['probabilityOfPrecipitation']),
+            quantitativePrecipitation: self::extract($data['quantitativePrecipitation']),
+            iceAccumulation: self::extract($data['iceAccumulation']),
+            snowfallAmount: self::extract($data['snowfallAmount']),
+            snowLevel: self::extract($data['snowLevel']),
+            ceilingHeight: self::extract($data['ceilingHeight']),
+            visibility: self::extract($data['visibility']),
+            transportWindSpeed: self::extract($data['transportWindSpeed']),
+            transportWindDirection: self::extract($data['transportWindDirection']),
+            mixingHeight: self::extract($data['mixingHeight']),
+            hainesIndex: self::extract($data['hainesIndex']),
+            lightningActivityLevel: self::extract($data['lightningActivityLevel']),
+            twentyFootWindSpeed: self::extract($data['twentyFootWindSpeed']),
+            twentyFootWindDirection: self::extract($data['twentyFootWindDirection']),
+            waveHeight: self::extract($data['waveHeight']),
+            wavePeriod: self::extract($data['wavePeriod']),
+            waveDirection: self::extract($data['waveDirection']),
+            primarySwellHeight: self::extract($data['primarySwellHeight']),
+            primarySwellDirection: self::extract($data['primarySwellDirection']),
+            secondarySwellHeight: self::extract($data['secondarySwellHeight']),
+            secondarySwellDirection: self::extract($data['secondarySwellDirection']),
+            wavePeriod2: self::extract($data['wavePeriod2']),
+            windWaveHeight: self::extract($data['windWaveHeight']),
+            dispersionIndex: self::extract($data['dispersionIndex']),
+            pressure: self::extract($data['pressure']),
+            probabilityOfTropicalStormWinds: self::extract($data['probabilityOfTropicalStormWinds']),
+            probabilityOfHurricaneWinds: self::extract($data['probabilityOfHurricaneWinds']),
+            potentialOf15mphWinds: self::extract($data['potentialOf15mphWinds']),
+            potentialOf25mphWinds: self::extract($data['potentialOf25mphWinds']),
+            potentialOf35mphWinds: self::extract($data['potentialOf35mphWinds']),
+            potentialOf45mphWinds: self::extract($data['potentialOf45mphWinds']),
+            potentialOf20mphWindGusts: self::extract($data['potentialOf20mphWindGusts']),
+            potentialOf30mphWindGusts: self::extract($data['potentialOf30mphWindGusts']),
+            potentialOf40mphWindGusts: self::extract($data['potentialOf40mphWindGusts']),
+            potentialOf50mphWindGusts: self::extract($data['potentialOf50mphWindGusts']),
+            potentialOf60mphWindGusts: self::extract($data['potentialOf60mphWindGusts']),
+            grasslandFireDangerIndex: self::extract($data['grasslandFireDangerIndex']),
+            probabilityOfThunder: self::extract($data['probabilityOfThunder']),
+            davisStabilityIndex: self::extract($data['davisStabilityIndex']),
+            atmosphericDispersionIndex: self::extract($data['atmosphericDispersionIndex']),
+            lowVisibilityOccurrenceRiskIndex: self::extract($data['lowVisibilityOccurrenceRiskIndex']),
+            stability: self::extract($data['stability']),
+            redFlagThreatIndex: self::extract($data['redFlagThreatIndex'])
+        );
+    }
+
+    protected static function extract(array $measurements): array
+    {
+        return array_filter(array_map(function ($measurement) use ($measurements) {
+            if (is_array($measurement['value'])) {
+                return $measurement['value'];
+            }
+
+            return MeasurementData::fromArray($measurement);
+        }, $measurements['values']));
+    }
 }
