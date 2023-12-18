@@ -5,6 +5,6 @@ return [
     'cache' => [
         // The default cache driver to use
         // Set to null to disable caching
-        'driver' => 'redis'
-    ]
+        'driver' => 'redis',
+    ],
 ];
