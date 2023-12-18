@@ -6,7 +6,7 @@ use ChrisReedIO\WeatherGov\Requests\BaseRequest;
 use Saloon\Enums\Method;
 
 /**
- * @property $pathSuffix
+ * @property ?string $pathSuffix
  */
 abstract class BaseGridpointsRequest extends BaseRequest
 {

@@ -4,6 +4,7 @@ namespace ChrisReedIO\WeatherGov;
 
 use ChrisReedIO\WeatherGov\Resources\ForecastResource;
 use ChrisReedIO\WeatherGov\Resources\PointResource;
+use ChrisReedIO\WeatherGov\Resources\ZoneResource;
 use Saloon\Http\Connector;
 use Saloon\Traits\Plugins\AcceptsJson;
 
@@ -44,6 +45,11 @@ class WeatherGovConnector extends Connector
     public function forecast(): ForecastResource
     {
         return new ForecastResource($this);
+    }
+
+    public function zone(): ZoneResource
+    {
+        return new ZoneResource($this);
     }
     //endregion
 }

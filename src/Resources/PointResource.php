@@ -9,6 +9,7 @@ use ChrisReedIO\WeatherGov\Data\PointData;
 use ChrisReedIO\WeatherGov\Requests\Gridpoints\ForecastRequest;
 use ChrisReedIO\WeatherGov\Requests\Gridpoints\GridpointsRequest;
 use ChrisReedIO\WeatherGov\Requests\Gridpoints\HourlyForecastRequest;
+use ChrisReedIO\WeatherGov\Requests\Gridpoints\StationsRequest;
 use ChrisReedIO\WeatherGov\Requests\OfficeRequest;
 use ChrisReedIO\WeatherGov\Requests\PointRequest;
 use ChrisReedIO\WeatherGov\WeatherGovConnector;
@@ -72,7 +73,6 @@ class PointResource extends BaseResource
 
     ////////////////////////////////////////////////////////////////////////////
 
-    //region Forecast Methods
     public function office(): OfficeData
     {
         $officeRequest = new OfficeRequest($this->getPoint()->gridId);
@@ -80,6 +80,7 @@ class PointResource extends BaseResource
         return $this->connector->send($officeRequest)->dtoOrFail();
     }
 
+    //region Gridpoints
     public function forecast(): ForecastData
     {
         $point = $this->getPoint();
@@ -110,26 +111,18 @@ class PointResource extends BaseResource
 
     /**
      * TODO: This will require cursor based pagination
+     * Returns the first 500 stations for the point for now
      * Example: https://api.weather.gov/gridpoints/LWX/97,71/stations
      */
-    public function stations(): void
+    public function stations(): mixed
     {
-        throw new Exception('Not Implemented');
-    }
+        $point = $this->getPoint();
 
-    public function zone(): void
-    {
-        throw new Exception('Not Implemented');
-    }
+        $stationRequest = new StationsRequest($point->gridId, $point->gridX, $point->gridY);
 
-    public function county(): void
-    {
-        throw new Exception('Not Implemented');
+        // TODO: Replace this with a cursor based pagination method
+        return $this->connector->send($stationRequest)->dtoOrFail();
     }
-
-    public function fire(): void
-    {
-        throw new Exception('Not Implemented');
-    }
+    //endregion Gridpoints
     //endregion
 }
