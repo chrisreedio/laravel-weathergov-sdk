@@ -13,7 +13,6 @@ use ChrisReedIO\WeatherGov\Requests\Gridpoints\StationsRequest;
 use ChrisReedIO\WeatherGov\Requests\OfficeRequest;
 use ChrisReedIO\WeatherGov\Requests\PointRequest;
 use ChrisReedIO\WeatherGov\WeatherGovConnector;
-use mysql_xdevapi\Exception;
 
 class PointResource extends BaseResource
 {
