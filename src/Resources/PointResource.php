@@ -13,7 +13,6 @@ use ChrisReedIO\WeatherGov\Requests\Gridpoints\StationsRequest;
 use ChrisReedIO\WeatherGov\Requests\OfficeRequest;
 use ChrisReedIO\WeatherGov\Requests\PointRequest;
 use ChrisReedIO\WeatherGov\WeatherGovConnector;
-use mysql_xdevapi\Exception;
 
 class PointResource extends BaseResource
 {
@@ -58,9 +57,12 @@ class PointResource extends BaseResource
      */
     protected function metadata(): PointData
     {
-        // TODO: Check for a cached version of the metadata
         $pointRequest = new PointRequest($this->latitude, $this->longitude);
-        $this->point = $this->connector->send($pointRequest)->dtoOrFail();
+        if (config('weathergov-sdk.cache.driver') === null) {
+            $pointRequest->disableCaching();
+        }
+        $response = $this->connector->send($pointRequest);
+        $this->point = $response->dtoOrFail();
 
         return $this->point;
     }

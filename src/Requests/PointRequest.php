@@ -3,10 +3,14 @@
 namespace ChrisReedIO\WeatherGov\Requests;
 
 use ChrisReedIO\WeatherGov\Data\PointData;
+use Saloon\CachePlugin\Contracts\Cacheable;
+use Saloon\CachePlugin\Traits\HasCaching;
 use Saloon\Http\Response;
 
-class PointRequest extends BaseRequest
+class PointRequest extends BaseRequest implements Cacheable
 {
+    use HasCaching;
+
     public function __construct(
         protected float $latitude,
         protected float $longitude
