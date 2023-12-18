@@ -2,7 +2,6 @@
 
 namespace ChrisReedIO\WeatherGov\Requests\Gridpoints;
 
-use ChrisReedIO\WeatherGov\Data\GridPointData;
 use Saloon\Http\Response;
 
 /**
