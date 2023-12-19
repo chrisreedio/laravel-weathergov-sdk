@@ -2,6 +2,7 @@
 
 namespace ChrisReedIO\WeatherGov\Facades;
 
+use ChrisReedIO\WeatherGov\WeatherGovConnector;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -11,6 +12,6 @@ class WeatherGov extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \ChrisReedIO\WeatherGov\WeatherGov::class;
+        return WeatherGovConnector::class;
     }
 }
